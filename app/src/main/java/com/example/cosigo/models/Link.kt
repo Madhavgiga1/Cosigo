@@ -3,7 +3,7 @@ package com.example.cosigo.models
 
 import com.google.gson.annotations.SerializedName
 
-data class TopLink(
+data class Link(
     @SerializedName("app")
     val app: String,
     @SerializedName("created_at")
@@ -27,7 +27,7 @@ data class TopLink(
     @SerializedName("url_id")
     val urlId: Int,
     @SerializedName("url_prefix")
-    val urlPrefix: String,
+    val urlPrefix: Any,
     @SerializedName("url_suffix")
     val urlSuffix: String,
     @SerializedName("web_link")

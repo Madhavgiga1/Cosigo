@@ -1,4 +1,4 @@
-package com.example.cosigo.ui
+package com.example.cosigo.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,10 +10,10 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cosigo.R
-import com.example.cosigo.adapters.RecentLinksAdapter
-import com.example.cosigo.adapters.TopLinkAdapter
+import com.example.cosigo.adapters.LinkAdapter
 import com.example.cosigo.databinding.FragmentHomeBinding
 import com.example.cosigo.models.Basic
+import com.example.cosigo.models.Link
 import com.example.cosigo.models.OverallUrlChart
 import com.example.cosigo.utils.NetworkResult
 import com.example.cosigo.viewmodels.MainViewModel
@@ -24,6 +24,7 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import com.github.mikephil.charting.formatter.ValueFormatter
+import com.google.android.material.card.MaterialCardView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -33,11 +34,11 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    var res:Basic?=null
+    lateinit var res:Basic
 
     private lateinit var mainViewModel: MainViewModel
-    private val topAdapter by lazy { TopLinkAdapter() }
-    private val recentAdapter by lazy { RecentLinksAdapter() }
+    private val Adapter by lazy { LinkAdapter() }
+
 
     
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,20 +54,24 @@ class HomeFragment : Fragment() {
 
         _binding= FragmentHomeBinding.inflate(layoutInflater,container,false)
         binding.greetings.text=mainViewModel.getGreetingMessage()
+
+        // created this function to get all the required data from the api to populate the fields
+        binding.RecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.RecyclerView.adapter=Adapter
         requestApiData()
+
+
 
         binding.topLinkButton.setOnClickListener {
             Setup_TopLink_Button()
-
-            binding.RecyclerView.adapter = topAdapter
-            setupRecyclerView()
+            Adapter.setData(res.data.topLinks)
         }
 
         binding.recentLinkButton.setOnClickListener {
 
             Setup_RecentLink_Button()
-            binding.RecyclerView.adapter = recentAdapter
-            setupRecyclerView()
+            Adapter.setData(res.data.recentLinks)
+
         }
 
 
@@ -76,20 +81,21 @@ class HomeFragment : Fragment() {
         mainViewModel.getProfileData()
         mainViewModel.profileResponse.observe(viewLifecycleOwner,{ response ->
             when(response){
+                is NetworkResult.Loading -> {
+                    binding.progressBar.visibility=View.VISIBLE
+                }
+
                 is NetworkResult.Success -> {
                     response.data?.let {
-
-                        binding.result=it
-                        topAdapter.links=it.data.topLinks?:emptyList()
-                        recentAdapter.recentlinks=it.data.recentLinks?:emptyList()
-                        res=it
+                        Adapter.setData(it.data.topLinks)
+                        binding.progressBar.visibility=View.GONE
+                        res=it;binding.result=it
                         setupChart(it.data.overallUrlChart)
                         Setup_TopLink_Button()
-                        binding.RecyclerView.adapter=topAdapter
-                        setupRecyclerView()
                     }
                 }
                 is NetworkResult.Error -> {
+                    binding.progressBar.visibility=View.GONE
                     Toast.makeText(
                         requireContext(),
                         response.message.toString(),
@@ -100,13 +106,11 @@ class HomeFragment : Fragment() {
         })
     }
 
-    private fun setupRecyclerView() {
 
-        binding.RecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-    }
 
     fun Setup_TopLink_Button(){
+
         binding.topLinkButton.setCardBackgroundColor(ContextCompat.getColorStateList(requireContext(),
             R.color.greenishbg
         ))
@@ -134,29 +138,39 @@ class HomeFragment : Fragment() {
             R.color.Pewter
         ))
     }
+
+    //to set up the chart
     private fun setupChart(data: OverallUrlChart) {
+        binding.lineChart.invalidate()
         val entries = data.javaClass.declaredFields.mapIndexed { index, field ->
             field.isAccessible = true
             Entry(index.toFloat(), field.getInt(data).toFloat())
         }
+        val dataSet = LineDataSet(entries, "Number of URL")
+        dataSet.mode = LineDataSet.Mode.CUBIC_BEZIER
+        dataSet.cubicIntensity = 0.2f
 
-        val dataSet = LineDataSet(entries, "Chart Label")
         val lineData = LineData(dataSet)
 
         binding.lineChart.data = lineData
         binding.lineChart.xAxis.position = XAxis.XAxisPosition.BOTTOM
-        binding.lineChart.xAxis.valueFormatter = MyXAxisValueFormatter() as ValueFormatter
-
+        binding.lineChart.xAxis.valueFormatter = MyXAxisValueFormatter(entries) as ValueFormatter
 
         binding.lineChart.invalidate()
     }
-    class MyXAxisValueFormatter : IAxisValueFormatter {
 
-
+    class MyXAxisValueFormatter(private val entry: List<Entry>) : IAxisValueFormatter {
         override fun getFormattedValue(value: Float, axis: AxisBase?): String {
-            return value.toInt().toString()
+            val intValue = value.toInt()
+            return if (intValue >= 0 && intValue < entry.size) {
+                val date = entry[intValue].data.toString()
+                date.substring(0, 4)
+            } else {
+                ""
+            }
         }
     }
+
 
 
 

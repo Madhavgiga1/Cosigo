@@ -1,4 +1,4 @@
-package com.example.cosigo.ui
+package com.example.cosigo.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

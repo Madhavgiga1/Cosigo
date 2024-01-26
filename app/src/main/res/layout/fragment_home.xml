@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:background="#178BBA"
 
-        tools:context=".ui.HomeFragment">
+        tools:context=".ui.fragments.HomeFragment">
 
 
         <TextView
@@ -75,9 +75,9 @@
                             android:id="@+id/name_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="15dp"
-                            android:layout_marginTop="5dp"
-                            android:text="Ajay Manva"
+                            android:layout_marginStart="10dp"
+
+                            android:text="Madhav Sharma"
                             android:textColor="@color/BalticSeabgcolor"
                             android:textSize="40sp"
                             app:fontFamily="@font/anton" />
@@ -101,8 +101,7 @@
                         android:layout_marginTop="10dp"
 
                         android:layout_width="match_parent"
-                        android:layout_height="200dp"
-
+                        android:layout_height="230dp"
                         app:cardCornerRadius="10dp">
                         <com.github.mikephil.charting.charts.LineChart
                             android:id="@+id/lineChart"
@@ -129,6 +128,65 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:orientation="horizontal" >
+
+
+
+                                <com.google.android.material.card.MaterialCardView
+                                    android:id="@+id/earnings_cardview"
+                                    android:layout_width="120dp"
+                                    app:cardCornerRadius="10dp"
+
+                                    app:strokeColor="@color/anotherbgcolor"
+                                    app:strokeWidth="1dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_margin="8dp"
+                                    android:padding="3dp"
+
+                                    >
+
+                                    <androidx.constraintlayout.widget.ConstraintLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        >
+
+                                        <ImageView
+                                            android:id="@+id/earnings_imgview"
+                                            android:layout_width="50dp"
+                                            android:layout_height="50dp"
+                                            android:layout_marginStart="10dp"
+                                            android:layout_marginTop="16dp"
+                                            app:strokeColor="@color/BalticSeabgcolor"
+                                            android:src="@drawable/ic_baseline_attach_money_24"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toTopOf="parent"
+                                            tools:srcCompat="@tools:sample/avatars" />
+
+                                        <TextView
+                                            android:id="@+id/today_earning_no"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="8dp"
+                                            android:layout_marginTop="12dp"
+                                            android:text="@{String.valueOf(result.extraIncome)}"
+                                            android:textColor="@color/mainactivitybg"
+                                            app:fontFamily="@font/archivo_black"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toBottomOf="@+id/earnings_imgview" />
+
+                                        <TextView
+                                            android:id="@+id/earn"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="8dp"
+                                            android:layout_marginTop="4dp"
+                                            android:text="Extra Income"
+                                            app:fontFamily="@font/alata"
+                                            android:textColor="@color/BalticSeabgcolor"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toBottomOf="@+id/today_earning_no" />
+                                    </androidx.constraintlayout.widget.ConstraintLayout>
+                                </com.google.android.material.card.MaterialCardView>
+
                                 <com.google.android.material.card.MaterialCardView
                                     android:id="@+id/totalclick_cardview"
                                     android:layout_width="120dp"
@@ -165,7 +223,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_marginStart="8dp"
                                             android:layout_marginTop="12dp"
-                                            android:text="@{String.valueOf(result.totalClicks)}"
+                                            android:text="@{String.valueOf(result.todayClicks)}"
                                             android:textColor="@color/mainactivitybg"
                                             app:fontFamily="@font/archivo_black"
                                             app:layout_constraintStart_toStartOf="parent"
@@ -474,5 +532,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_baseline_settings_24" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintEnd_toStartOf="@+id/imageView6"
+            app:layout_constraintStart_toEndOf="@+id/dashboard_text"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

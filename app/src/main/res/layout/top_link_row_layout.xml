@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
-            name="toplink"
-            type="com.example.cosigo.models.TopLink" />
+            name="link"
+            type="com.example.cosigo.models.Link" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="330dp"
+        android:layout_width="345dp"
         android:layout_margin="7dp"
-        android:layout_height="300dp">
+        android:layout_height="240dp">
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="0dp"
@@ -31,8 +31,8 @@
 
                 <ImageView
                     android:id="@+id/img_view"
-                    loadImageFromUrl="@{toplink.originalImage}"
-                    android:layout_width="110dp"
+                    loadImageFromUrl="@{link.originalImage}"
+                    android:layout_width="140dp"
                     android:layout_height="0dp"
                     android:scaleType="fitXY"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -48,7 +48,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="3dp"
                     android:maxLines="2"
-                    android:text="@{toplink.title}"
+                    android:text="@{link.title}"
                     android:textColor="@color/BalticSeabgcolor"
                     android:textSize="23sp"
                     app:fontFamily="@font/anton"
@@ -64,7 +64,7 @@
                     android:layout_marginStart="5dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="5dp"
-                    android:text="@{String.valueOf(toplink.totalClicks)}"
+                    android:text="@{String.valueOf(link.totalClicks)}"
                     android:textColor="@color/greenishbg"
                     android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -78,7 +78,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_marginStart="5dp"
-                    android:text="@{toplink.createdAt}"
+                    android:text="@{link.createdAt}"
                     android:textColor="@color/mainactivitybg"
                     android:textSize="15sp"
 
@@ -95,7 +95,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="6dp"
                     android:maxLength="50"
-                    android:text="@{toplink.webLink}"
+                    android:text="@{link.webLink}"
                     android:textColor="#1F5D60"
                     android:textSize="15sp"
                     app:fontFamily="@font/archivo_black"
