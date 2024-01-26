@@ -21,5 +21,7 @@ UI Aesthetics: Focuses on creating an appealing and user-friendly interface.
 
 ![merge5](https://github.com/Madhavgiga1/OpeninApp/assets/77728555/f01663ff-dcdd-47b9-a2d4-405d5eb9d266)
 
-![ezgif-2-e460623e4a](https://github.com/Madhavgiga1/OpeninApp/assets/77728555/a60074b0-6690-48fa-a772-748e20a7b6f9)
+
+![ezgif-5-7579fbb43f](https://github.com/Madhavgiga1/OpeninApp/assets/77728555/a86b0ff7-c1c0-4f72-8990-9bca709518ae)
+
 
