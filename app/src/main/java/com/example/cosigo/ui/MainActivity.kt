@@ -1,7 +1,8 @@
-package com.example.cosigo
+package com.example.cosigo.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.cosigo.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

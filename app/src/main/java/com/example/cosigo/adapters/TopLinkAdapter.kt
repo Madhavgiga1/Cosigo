@@ -3,20 +3,22 @@ package com.example.cosigo.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cosigo.databinding.LinkrowbindingBinding
+import com.example.cosigo.databinding.TopLinkRowLayoutBinding
+import com.example.cosigo.models.TopLink
 
-class LinkAdapter: RecyclerView.Adapter<LinkAdapter.LinkViewHolder>() {
-    //var links= emptyList<>()
+class TopLinkAdapter: RecyclerView.Adapter<TopLinkAdapter.LinkViewHolder>() {
+    var links= emptyList<TopLink>()
 
-    class LinkViewHolder(private val binding:LinkrowbindingBinding):RecyclerView.ViewHolder(binding.root){
-        fun bind(){
-
+    class LinkViewHolder(private val binding: TopLinkRowLayoutBinding):RecyclerView.ViewHolder(binding.root){
+        fun bind(topLink: TopLink){
+            binding.toplink=topLink
+            binding.executePendingBindings()
 
         }
         companion object{
             fun from(parent: ViewGroup):LinkViewHolder{
                 val layoutInflater= LayoutInflater.from(parent.context)
-                val binding=LinkrowbindingBinding.inflate(layoutInflater,parent,false)
+                val binding=TopLinkRowLayoutBinding.inflate(layoutInflater,parent,false)
                 return LinkViewHolder(binding)
             }
         }
@@ -27,10 +29,11 @@ class LinkAdapter: RecyclerView.Adapter<LinkAdapter.LinkViewHolder>() {
     }
 
     override fun onBindViewHolder(holder:LinkViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        val current_top_link=links[position]
+        holder.bind(current_top_link)
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return links.size
     }
 }

@@ -1,7 +1,9 @@
 package com.example.cosigo.di
 
+import com.example.cosigo.data.network.AuthInterceptor
 import com.example.cosigo.data.network.OpenAppApi
 import com.example.cosigo.utils.Constants.Companion.BASE_URL
+import com.example.cosigo.utils.Constants.Companion.bearer
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,12 +17,20 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
+
     @Singleton
     @Provides
-    fun provideHttpClient() : OkHttpClient {
+    fun provideAuthInterceptor(): AuthInterceptor {
+        return AuthInterceptor(bearer)
+    }
+
+    @Singleton
+    @Provides
+    fun provideHttpClient(authInterceptor: AuthInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
             .readTimeout(15, TimeUnit.SECONDS)
             .connectTimeout(15, TimeUnit.SECONDS)
+            .addInterceptor(authInterceptor) // Add the AuthInterceptor here
             .build()
     }
 

@@ -1,42 +1,478 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#178BBA"
-    tools:context=".ui.HomeFragment">
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="result"
+            type="com.example.cosigo.models.Basic" />
+
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#178BBA"
+
+        tools:context=".ui.HomeFragment">
 
 
-    <TextView
-        android:id="@+id/dashboard_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:text="Dashboard"
-        android:textSize="20sp"
-        android:textColor="@color/Cream"
-        app:fontFamily="@font/alata"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/dashboard_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="8dp"
+            android:text="Dashboard"
+            android:textColor="@color/Cream"
+            android:textSize="30sp"
+            app:fontFamily="@font/alata"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dashboard_text"
-        app:shapeAppearanceOverlay="@style/TopCurvedCorner.Card" >
+        <com.google.android.material.card.MaterialCardView
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            android:layout_marginTop="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:cardBackgroundColor="@color/mistyighter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dashboard_text"
+            app:shapeAppearanceOverlay="@style/TopCurvedCorner.Card" >
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/greetings"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="10dp"
+                        android:textSize="22sp"
+                        android:textColor="@color/dark"
+                        android:text="TextView"
+                        app:fontFamily="@font/anton" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        >
+                        <TextView
+                            android:id="@+id/name_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:text="Ajay Manva"
+                            android:textColor="@color/BalticSeabgcolor"
+                            android:textSize="40sp"
+                            app:fontFamily="@font/anton" />
+                        <ImageView
+                            android:id="@+id/wave"
+                            android:layout_width="100dp"
+                            android:layout_height="80dp"
+                            android:src="@drawable/hia"
+                            android:scaleType="fitXY"
+                            android:layout_marginStart="15dp"
+
+                            >
+                        </ImageView>
+                    </LinearLayout>
+
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardView"
+                        app:strokeColor="@color/BalticSeabgcolor"
+                        app:strokeWidth="1dp"
+                        android:layout_marginTop="10dp"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+
+                        app:cardCornerRadius="10dp">
+                        <com.github.mikephil.charting.charts.LineChart
+                            android:id="@+id/lineChart"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:layout_marginTop="8dp"
+                        android:shadowColor="@color/Cream"
+                        app:strokeColor="@color/mistyighter"
+                        app:strokeWidth="1dp"
+                        app:cardCornerRadius="10dp">
+
+                        <HorizontalScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal" >
+                                <com.google.android.material.card.MaterialCardView
+                                    android:id="@+id/totalclick_cardview"
+                                    android:layout_width="120dp"
+                                    app:cardCornerRadius="10dp"
+
+                                    app:strokeColor="@color/anotherbgcolor"
+                                    app:strokeWidth="1dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_margin="8dp"
+                                    android:padding="3dp"
+
+                                    >
+
+                                    <androidx.constraintlayout.widget.ConstraintLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        >
+
+                                        <ImageView
+                                            android:id="@+id/clicks_imgview"
+                                            android:layout_width="50dp"
+                                            android:layout_height="50dp"
+                                            android:layout_marginStart="10dp"
+                                            android:layout_marginTop="16dp"
+                                            app:strokeColor="@color/BalticSeabgcolor"
+                                            android:src="@drawable/ic_baseline_stars_24"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toTopOf="parent"
+                                            tools:srcCompat="@tools:sample/avatars" />
+
+                                        <TextView
+                                            android:id="@+id/today_click_no"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="8dp"
+                                            android:layout_marginTop="12dp"
+                                            android:text="@{String.valueOf(result.totalClicks)}"
+                                            android:textColor="@color/mainactivitybg"
+                                            app:fontFamily="@font/archivo_black"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toBottomOf="@+id/clicks_imgview" />
+
+                                        <TextView
+                                            android:id="@+id/tc"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="8dp"
+                                            android:layout_marginTop="4dp"
+                                            android:text="Today's clicks"
+                                            app:fontFamily="@font/alata"
+                                            android:textColor="@color/BalticSeabgcolor"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toBottomOf="@+id/today_click_no" />
+                                    </androidx.constraintlayout.widget.ConstraintLayout>
+                                </com.google.android.material.card.MaterialCardView>
+                                <com.google.android.material.card.MaterialCardView
+                                    android:id="@+id/location_cardview"
+                                    android:layout_width="120dp"
+                                    app:cardCornerRadius="10dp"
+                                    app:strokeColor="@color/anotherbgcolor"
+                                    app:strokeWidth="1dp"
+                                    android:layout_height="match_parent"
+
+                                    android:layout_margin="8dp"
+                                    android:padding="3dp"
+                                    >
+
+                                    <androidx.constraintlayout.widget.ConstraintLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent">
+
+                                        <ImageView
+                                            android:id="@+id/location_img_view"
+                                            android:layout_width="50dp"
+                                            android:layout_height="50dp"
+                                            android:layout_marginStart="10dp"
+                                            android:src="@drawable/ic_baseline_location_on_24"
+                                            android:layout_marginTop="16dp"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toTopOf="parent"
+                                            tools:srcCompat="@tools:sample/avatars" />
+
+                                        <TextView
+                                            android:id="@+id/location_text"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="8dp"
+                                            android:layout_marginTop="12dp"
+                                            android:text="@{result.topLocation}"
+                                            android:textColor="@color/greenishbg"
+                                            app:fontFamily="@font/archivo_black"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toBottomOf="@+id/location_img_view" />
+
+                                        <TextView
+                                            android:id="@+id/textView4"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="8dp"
+                                            android:layout_marginTop="8dp"
+                                            android:text="Top Location"
+                                            app:fontFamily="@font/alata"
+                                            android:textColor="@color/BalticSeabgcolor"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toBottomOf="@+id/location_text" />
+                                    </androidx.constraintlayout.widget.ConstraintLayout>
+                                </com.google.android.material.card.MaterialCardView>
+                                <com.google.android.material.card.MaterialCardView
+                                    android:id="@+id/topsource_cardview"
+                                    app:strokeColor="@color/anotherbgcolor"
+                                    app:strokeWidth="1dp"
+                                    android:layout_width="120dp"
+                                    app:cardCornerRadius="10dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_margin="8dp"
+                                    android:padding="3dp"
+                                    >
+
+                                    <androidx.constraintlayout.widget.ConstraintLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent">
+
+                                        <ImageView
+                                            android:id="@+id/topsource_imgview"
+                                            android:layout_width="50dp"
+                                            android:layout_height="50dp"
+                                            android:src="@drawable/ic_baseline_source_24"
+                                            android:layout_marginStart="10dp"
+                                            android:layout_marginTop="16dp"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toTopOf="parent"
+                                            tools:srcCompat="@tools:sample/avatars" />
+
+                                        <TextView
+                                            android:id="@+id/topsource_text"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="8dp"
+                                            android:layout_marginTop="12dp"
+                                            android:text="@{result.topSource}"
+                                            android:textColor="@color/mainactivitybg"
+                                            app:fontFamily="@font/archivo_black"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toBottomOf="@+id/topsource_imgview" />
+
+                                        <TextView
+                                            android:id="@+id/textView6"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="8dp"
+                                            android:layout_marginTop="8dp"
+                                            android:text="Top source"
+                                            android:textColor="@color/BalticSeabgcolor"
+                                            app:fontFamily="@font/alata"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toBottomOf="@+id/topsource_text" />
+                                    </androidx.constraintlayout.widget.ConstraintLayout>
+                                </com.google.android.material.card.MaterialCardView>
+
+                            </LinearLayout>
+
+                        </HorizontalScrollView>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/viewanalytics_card_view"
+                        android:layout_width="320dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        app:strokeColor="@color/purplish"
+                        app:strokeWidth="1dp"
+                        app:cardCornerRadius="15dp">
+
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="3dp"
+                            >
+
+                            <TextView
+                                android:id="@+id/analytics"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="View Analytics"
+                                android:textColor="@color/darkviolet"
+                                android:textSize="20sp"
+                                app:fontFamily="@font/archivo_black"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.502"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.526" />
+
+                            <ImageView
+                                android:id="@+id/imageView4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="8dp"
+                                app:layout_constraintEnd_toStartOf="@+id/analytics"
+                                app:layout_constraintTop_toTopOf="@+id/analytics"
+                                app:srcCompat="@drawable/ic_baseline_trending_up_24" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="10dp"
+                        app:cardCornerRadius="18dp"
+                        app:strokeColor="@color/BalticSeabgcolor">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+
+                            <ImageView
+                                android:id="@+id/imageView5"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_marginEnd="16dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:srcCompat="@drawable/ic_baseline_search_24" />
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/top_link_button"
+                                android:layout_width="120dp"
+                                android:layout_height="40dp"
+                                android:layout_marginStart="15dp"
+                                app:strokeColor="@color/BalticSeabgcolor"
+                                app:strokeWidth="1dp"
+                                android:layout_marginTop="8dp"
+                                app:cardCornerRadius="10dp"
+
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" >
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <TextView
+                                        android:id="@+id/top_link_button_text"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Top Links"
+                                        android:textColor="@color/GunmetalGray"
+                                        android:textSize="20sp"
+                                        app:fontFamily="@font/archivo_black"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        app:layout_constraintHorizontal_bias="0.5"
+                                        app:layout_constraintVertical_bias="0.5"
+                                        />
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+                            </com.google.android.material.card.MaterialCardView>
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/recent_link_button"
+                                android:layout_width="120dp"
+                                android:layout_height="40dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginEnd="2dp"
+                                app:cardCornerRadius="10dp"
+                                app:strokeColor="@color/BalticSeabgcolor"
+                                app:strokeWidth="1dp"
+                                app:layout_constraintEnd_toStartOf="@+id/imageView5"
+                                app:layout_constraintHorizontal_bias="0.301"
+                                app:layout_constraintStart_toEndOf="@+id/top_link_button"
+                                app:layout_constraintTop_toTopOf="parent" >
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+
+                                    <TextView
+                                        android:id="@+id/recentlinkbutton_text"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Recent Links"
+                                        android:textSize="20sp"
+                                        app:fontFamily="@font/anton"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        app:layout_constraintHorizontal_bias="0.5"
+                                        app:layout_constraintVertical_bias="0.5"/>
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+                            </com.google.android.material.card.MaterialCardView>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="5dp"
+                        app:strokeColor="@color/BalticSeabgcolor"
+                        app:cardCornerRadius="10dp">
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                android:id="@+id/RecyclerView"
+                                android:layout_width="match_parent"
+
+                                android:layout_height="match_parent"
+                                android:layout_margin="10dp"
+                                />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+            </ScrollView>
+        </com.google.android.material.card.MaterialCardView>
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="36dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_baseline_settings_24" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

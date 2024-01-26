@@ -20,7 +20,7 @@ android {
         targetSdk 33
         versionCode 1
         versionName "1.0"
-
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -126,10 +126,13 @@ dependencies {
 
 
     implementation "androidx.datastore:datastore-preferences:1.0.0"
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
 
     //chart
+    /*implementation("androidx.multidex:multidex:2.0.1")
     implementation 'com.anychart:AnyChart-Android:1.1.2'
-    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'*/
 
 
 

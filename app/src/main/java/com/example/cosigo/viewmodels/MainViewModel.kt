@@ -14,6 +14,7 @@ import com.example.cosigo.utils.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Response
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -22,6 +23,7 @@ class MainViewModel @Inject constructor(
 ):AndroidViewModel(application)
 {
 
+   //Code for retrofit
     var profileResponse:MutableLiveData<NetworkResult<Basic>> = MutableLiveData()
 
     fun getProfileData()=viewModelScope.launch {
@@ -35,7 +37,7 @@ class MainViewModel @Inject constructor(
                 val response=repository.remote.getData()
                 profileResponse.value=handleProfileResponse(response)
             }catch (e:Exception) {
-                Log.d("error1", e.toString())
+                Log.d("general error ", e.toString())
                 profileResponse.value = NetworkResult.Error("Error getting profile")
             }
         }
@@ -72,6 +74,17 @@ class MainViewModel @Inject constructor(
             capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
             capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
             else -> false
+        }
+    }
+
+    // for Greetings msg
+    fun getGreetingMessage(): String {
+        val currentTime = Calendar.getInstance()
+
+        return when (currentTime.get(Calendar.HOUR_OF_DAY)) {
+            in 6..11 -> "Good Morning"
+            in 12..17 -> "Good Afternoon"
+            else -> "Good Night"
         }
     }
 }
