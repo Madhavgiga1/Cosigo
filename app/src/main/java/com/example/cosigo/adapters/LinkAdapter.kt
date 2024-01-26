@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cosigo.databinding.TopLinkRowLayoutBinding
+import com.example.cosigo.databinding.LinkRowLayoutBinding
 import com.example.cosigo.models.Link
 import com.example.cosigo.util.LinkDiffUtil
 
@@ -13,7 +13,7 @@ import com.example.cosigo.util.LinkDiffUtil
 class LinkAdapter: RecyclerView.Adapter<LinkAdapter.LinkViewHolder>() {
     var links= emptyList<Link>()
 
-    class LinkViewHolder(private val binding: TopLinkRowLayoutBinding):RecyclerView.ViewHolder(binding.root){
+    class LinkViewHolder(private val binding:LinkRowLayoutBinding):RecyclerView.ViewHolder(binding.root){
         fun bind(Link:Link){
             binding.link=Link
             binding.executePendingBindings()
@@ -21,7 +21,7 @@ class LinkAdapter: RecyclerView.Adapter<LinkAdapter.LinkViewHolder>() {
         companion object{
             fun from(parent: ViewGroup):LinkViewHolder{
                 val layoutInflater= LayoutInflater.from(parent.context)
-                val binding=TopLinkRowLayoutBinding.inflate(layoutInflater,parent,false)
+                val binding=LinkRowLayoutBinding.inflate(layoutInflater,parent,false)
                 return LinkViewHolder(binding)
             }
         }
